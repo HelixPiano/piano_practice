@@ -10,6 +10,103 @@ def print_results(dictionary, name):
     print('----------------------------------------------')
 
 
+def print_harmonic_melodic_info():
+    print(f"Harmonic: Siebten Ton um einen Halbtonschritt erhöhen.")
+    print(f"Melodic: Sechsten und siebten Ton um einen Halbtonschritt erhöhen beim Aufstieg. Beim Abstieg beide wieder ohne Erhöhung.")
+    print('----------------------------------------------')
+
+
+def print_vorzeichen_dur(name):
+    print(f"Tonart: {name} Major/Dur")
+    if name == 'C':
+        print(f"Ohne Vorzeichen")
+    elif name == 'F':
+        print(f"Vorzeichen: B")
+    elif name == 'G':
+        print(f"Vorzeichen: Fis")
+    elif name == 'D':
+        print(f"Vorzeichen: Fis Cis")
+    elif name == 'A':
+        print(f"Vorzeichen: Fis Cis Gis")
+    elif name == 'E':
+        print(f"Vorzeichen: Fis Cis Gis Dis")
+    elif name == 'B':
+        print(f"Vorzeichen: Fis Cis Gis Dis Ais")
+    elif name == 'D Flat':
+        print(f"Vorzeichen: B Es As Des Ges")
+    elif name == 'E Flat':
+        print(f"Vorzeichen: B Es As")
+    elif name == 'F Sharp':
+        print(f"Vorzeichen: Fis Cis Gid Dis Ais Eis")
+    elif name == 'A Flat':
+        print(f"Vorzeichen: Gis Ais His Cis Dis Eis Fisis(!)")
+    elif name == 'B Flat':
+        print(f"Vorzeichen: B Es")
+    else:
+        assert False, "Kann Vorzeichen für Dur nicht finden"
+    print('----------------------------------------------')
+
+
+def print_vorzeichen_moll(name):
+    print(f"Parallele Molltonart: {name}/Moll")
+    if name == 'A Minor':
+        print(f"Ohne Vorzeichen")
+    elif name == 'D Minor':
+        print(f"Vorzeichen: B")
+    elif name == 'E Minor':
+        print(f"Vorzeichen: Fis")
+    elif name == 'B Minor':
+        print(f"Vorzeichen: Fis Cis")
+    elif name == 'F Sharp Minor':
+        print(f"Vorzeichen: Fis Cis Gis")
+    elif name == 'C Sharp Minor':
+        print(f"Vorzeichen: Fis Cis Gis Dis")
+    elif name == 'G Sharp Minor':
+        print(f"Vorzeichen: Fis Cis Gid Dis Ais")
+    elif name == 'B Flat Minor':
+        print(f"Vorzeichen: B Es As Des Ges")
+    elif name == 'C Minor':
+        print(f"Vorzeichen: B Es As")
+    elif name == 'D Sharp Minor':
+        print(f"Vorzeichen: Fis Cis Gid Dis Ais Eis")
+    elif name == 'F Minor':
+        print(f"Vorzeichen: B Es As Des")
+    elif name == 'G Minor':
+        print(f"Vorzeichen: B Es")
+    else:
+        assert False, "Kann Vorzeichen für Moll nicht finden"
+    print('----------------------------------------------')
+
+
+def pick_relative_key(name):
+    if name == 'C':
+        return f"A Minor"
+    elif name == 'F':
+        return f"D Minor"
+    elif name == 'G':
+        return f"E Minor"
+    elif name == 'D':
+        return f"B Minor"
+    elif name == 'A':
+        return f"F Sharp Minor"
+    elif name == 'E':
+        return f"C Sharp Minor"
+    elif name == 'B':
+        return f"G Sharp Minor"
+    elif name == 'D Flat':
+        return f"B Flat Minor"
+    elif name == 'E Flat':
+        return f"C Minor"
+    elif name == 'F Sharp':
+        return f"D Sharp Minor"
+    elif name == 'A Flat':
+        return f"F Minor"
+    elif name == 'B Flat':
+        return f"G Minor"
+    else:
+        assert False, "Can't find parallel key"
+
+
 if __name__ == '__main__':
     Arpeggio = {
         # https://mypianoteacher.net/resources/learn-to-play-scales/all-major-arpeggios/
@@ -121,14 +218,17 @@ if __name__ == '__main__':
 
     }
 
-    Result_arpeggio = random.choice(list(Arpeggio))
-    print_results(Arpeggio, Result_arpeggio)
+    picked_arpeggio = random.choice(list(Arpeggio))
+    print_results(dictionary=Arpeggio, name=picked_arpeggio)
 
-    Result_Major_Scales = random.choice(list(Major_Scales))
-    print_results(Major_Scales, Result_Major_Scales)
+    list_of_scales = ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'D Flat', 'E Flat', 'F Sharp', 'A Flat', 'B Flat']
+    picked_scale = random.choice(list_of_scales)
 
-    Result_Minor_Scales_Harmonic = random.choice(list(Minor_Scales_Harmonic))
-    print_results(Minor_Scales_Harmonic, Result_Minor_Scales_Harmonic)
-
-    Result_Minor_Scales_Melodic = random.choice(list(Minor_Scales_Melodic))
-    print_results(Minor_Scales_Melodic, Result_Minor_Scales_Melodic)
+    print_vorzeichen_dur(picked_scale)
+    print_results(Major_Scales, f"{picked_scale} Major Scale")
+    relative_key = pick_relative_key(picked_scale)
+    print_vorzeichen_moll(relative_key)
+    relative_key = relative_key.split()[0]
+    print_results(Minor_Scales_Harmonic, f"{relative_key} Harmonic Minor Scale")
+    print_results(Minor_Scales_Melodic, f"{relative_key} Melodic Minor Scale")
+    print_harmonic_melodic_info()
