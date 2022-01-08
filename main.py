@@ -228,7 +228,7 @@ if __name__ == '__main__':
     print_results(Major_Scales, f"{picked_scale} Major Scale")
     relative_key = pick_relative_key(picked_scale)
     print_vorzeichen_moll(relative_key)
-    relative_key = relative_key.split()[0]
+    relative_key = relative_key.split()[:-1]
     print_results(Minor_Scales_Harmonic, f"{relative_key} Harmonic Minor Scale")
     print_results(Minor_Scales_Melodic, f"{relative_key} Melodic Minor Scale")
     print_harmonic_melodic_info()
