@@ -1,9 +1,10 @@
 import random
-
+from colorama import Fore, Style
 
 def print_results(dictionary, name):
     result = dictionary.get(name)
-    print(f"Name: {name}")
+    print(f"Name: {Fore.RED + name}")
+    print(Style.RESET_ALL)
     print(f"Right hand: {result[0]}")
     print(f"Notes: {result[1]}")
     print(f"Left Hand: {result[2]}")
@@ -17,7 +18,8 @@ def print_harmonic_melodic_info():
 
 
 def print_vorzeichen_dur(name):
-    print(f"Tonart: {name} Major/Dur")
+    print(f"Tonart: {Fore.RED + name} Major/Dur")
+    print(Style.RESET_ALL)
     if name == 'C':
         print(f"Ohne Vorzeichen")
     elif name == 'F':
@@ -48,7 +50,8 @@ def print_vorzeichen_dur(name):
 
 
 def print_vorzeichen_moll(name):
-    print(f"Parallele Molltonart: {name}/Moll")
+    print(f"Parallele Molltonart: {Fore.RED + name}/Moll")
+    print(Style.RESET_ALL)
     if name == 'A Minor':
         print(f"Ohne Vorzeichen")
     elif name == 'D Minor':
@@ -67,8 +70,8 @@ def print_vorzeichen_moll(name):
         print(f"Vorzeichen: B Es As Des Ges")
     elif name == 'C Minor':
         print(f"Vorzeichen: B Es As")
-    elif name == 'D Sharp Minor':
-        print(f"Vorzeichen: Fis Cis Gid Dis Ais Eis")
+    elif name == 'E Flat Minor':
+        print(f"Vorzeichen: B Es As Des Ges Ces")
     elif name == 'F Minor':
         print(f"Vorzeichen: B Es As Des")
     elif name == 'G Minor':
@@ -98,7 +101,8 @@ def pick_relative_key(name):
     elif name == 'E Flat':
         return f"C Minor"
     elif name == 'F Sharp':
-        return f"D Sharp Minor"
+        print('Redirect to D Sharp Minor to E Flat Minor')
+        return f"E Flat Minor"
     elif name == 'A Flat':
         return f"F Minor"
     elif name == 'B Flat':
@@ -228,7 +232,7 @@ if __name__ == '__main__':
     print_results(Major_Scales, f"{picked_scale} Major Scale")
     relative_key = pick_relative_key(picked_scale)
     print_vorzeichen_moll(relative_key)
-    relative_key = relative_key.split()[:-1]
+    relative_key=relative_key.replace(" Minor","")
     print_results(Minor_Scales_Harmonic, f"{relative_key} Harmonic Minor Scale")
     print_results(Minor_Scales_Melodic, f"{relative_key} Melodic Minor Scale")
     print_harmonic_melodic_info()
